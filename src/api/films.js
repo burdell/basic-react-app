@@ -5,7 +5,13 @@ export async function getFilms(filmUrlList) {
   const jsonPromises = responses.map(response => response.json());
   const films = await Promise.all(jsonPromises);
 
-  return films.map(film => ({
-    title: film.title
-  }));
+  return films.map(formatFilm);
+}
+
+export function formatFilm(film) {
+  return {
+    title: film.title,
+    episode_id: film.episode_id,
+    release_date: film.release_date
+  };
 }
